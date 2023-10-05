@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Цена OGN</title>
+</head>
+<body>
+    <h1>Цена OGN:</h1>
+    <p id="ognPrice">Загрузка цены...</p>
+
+    <script>
+        // Функция для получения и отображения цены OGN
+        function fetchOGNPrice() {
+            fetch('https://api.coingecko.com/api/v3/simple/price?ids=origin-protocol&vs_currencies=usd')
+                .then(response => response.json())
+                .then(data => {
+                    const ognPrice = data['origin-protocol']['usd'];
+                    document.getElementById('ognPrice').textContent = `$${ognPrice}`;
+                })
+                .catch(error => {
+                    console.error('Ошибка при получении цены OGN:', error);
+                    document.getElementById('ognPrice').textContent = 'Не удалось получить цену OGN';
+                });
+        }
+
+        // Вызываем функцию fetchOGNPrice при загрузке страницы
+        fetchOGNPrice();
+    </script>
+</body>
+</html>
